@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepurr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Englebert&family=Londrina+Solid:wght@400;900&family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background-color: #f3ede4; color: #1a1a1a; min-height: 100vh; display: flex; flex-direction: column; background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
+        .center { flex: 1; display: flex; align-items: center; justify-content: center; }
+        .center > div { text-align: center; position: relative; }
+        .logo { font-family: 'Londrina Solid', sans-serif; font-size: clamp(50px, 14vw, 252px); letter-spacing: 2px; color: #e8432a; padding: 0 16px; line-height: 1; margin-bottom: 0; cursor: default; }
+        .logo span { display: inline-block; transition: transform 0.3s ease; }
+        .logo:hover span:nth-child(1) { transform: rotate(-5deg) translateY(-4px); transition-delay: 0s; }
+        .logo:hover span:nth-child(2) { transform: rotate(3deg) translateY(6px); transition-delay: 0.03s; }
+        .logo:hover span:nth-child(3) { transform: rotate(-4deg) translateY(-5px); transition-delay: 0.06s; }
+        .logo:hover span:nth-child(4) { transform: rotate(6deg) translateY(3px); transition-delay: 0.09s; }
+        .logo:hover span:nth-child(5) { transform: rotate(-3deg) translateY(-6px); transition-delay: 0.12s; }
+        .logo:hover span:nth-child(6) { transform: rotate(5deg) translateY(4px); transition-delay: 0.15s; }
+        .logo:hover span:nth-child(7) { transform: rotate(-6deg) translateY(-3px); transition-delay: 0.18s; }
+        .logo:hover span:nth-child(8) { transform: rotate(4deg) translateY(5px); transition-delay: 0.21s; }
+        .tagline { font-family: 'Englebert', cursive; font-size: clamp(22px, 4vw, 40px); color: rgba(0,0,0,0.4); letter-spacing: 1px; }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 28px; }
+        .nav-logo { font-family: 'Londrina Solid', sans-serif; font-size: 22px; color: #e8432a; text-decoration: none; }
+        .nav-links a { color: rgba(0,0,0,0.4); text-decoration: none; font-size: 14px; margin-left: 24px; font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .nav-links a:hover { color: #1a1a1a; }
+        .copyright { color: rgba(0,0,0,0.2); font-size: 11px; margin-top: 16px; }
+        .cat-graphics { position: absolute; pointer-events: none; }
+        .paw { position: absolute; font-size: clamp(24px, 4vw, 48px); opacity: 0.12; }
+        .scratch { position: fixed; pointer-events: none; opacity: 0.08; }
+        .scratch::before { content: ''; display: block; width: clamp(30px, 5vw, 60px); height: clamp(50px, 8vw, 100px); background: repeating-linear-gradient(10deg, transparent, transparent 3px, #1a1a1a 3px, #1a1a1a 5px, transparent 5px, transparent 8px); border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo">PRE PURR</a>
+        <div class="nav-links">
+            <a href="/privacy">Privacy</a>
+            <a href="/support">Support</a>
+            <a href="mailto:prepurr.apps@gmail.com">Contact</a>
+        </div>
+    </nav>
+    <div class="paw" style="position:fixed; top: 8%; left: 5%; transform: rotate(-25deg);">🐾</div>
+    <div class="paw" style="position:fixed; top: 12%; right: 8%; transform: rotate(15deg);">🐾</div>
+    <div class="paw" style="position:fixed; top: 35%; left: 3%; transform: rotate(-45deg); font-size: clamp(18px, 3vw, 36px);">🐾</div>
+    <div class="paw" style="position:fixed; top: 30%; right: 4%; transform: rotate(30deg);">🐾</div>
+    <div class="paw" style="position:fixed; top: 55%; left: 8%; transform: rotate(10deg);">🐾</div>
+    <div class="paw" style="position:fixed; top: 60%; right: 6%; transform: rotate(-20deg); font-size: clamp(18px, 3vw, 36px);">🐾</div>
+    <div class="paw" style="position:fixed; top: 80%; left: 12%; transform: rotate(35deg); font-size: clamp(18px, 3vw, 36px);">🐾</div>
+    <div class="paw" style="position:fixed; top: 78%; right: 10%; transform: rotate(-15deg);">🐾</div>
+    <div class="paw" style="position:fixed; top: 20%; left: 30%; transform: rotate(50deg); font-size: clamp(16px, 2.5vw, 30px);">🐾</div>
+    <div class="paw" style="position:fixed; top: 70%; right: 30%; transform: rotate(-40deg); font-size: clamp(16px, 2.5vw, 30px);">🐾</div>
+    <div class="paw" style="position:fixed; top: 90%; left: 40%; transform: rotate(20deg);">🐾</div>
+    <div class="paw" style="position:fixed; top: 5%; left: 50%; transform: rotate(-10deg); font-size: clamp(16px, 2.5vw, 30px);">🐾</div>
+
+    <div class="scratch" style="top: 6%; left: 15%; transform: rotate(-15deg);"></div>
+    <div class="scratch" style="top: 18%; right: 18%; transform: rotate(12deg);"></div>
+    <div class="scratch" style="top: 40%; left: 2%; transform: rotate(-8deg);"></div>
+    <div class="scratch" style="top: 45%; right: 3%; transform: rotate(20deg);"></div>
+    <div class="scratch" style="top: 65%; left: 20%; transform: rotate(-25deg);"></div>
+    <div class="scratch" style="top: 72%; right: 22%; transform: rotate(8deg);"></div>
+    <div class="scratch" style="top: 85%; left: 6%; transform: rotate(18deg);"></div>
+    <div class="scratch" style="top: 88%; right: 5%; transform: rotate(-12deg);"></div>
+    <div class="scratch" style="top: 25%; left: 45%; transform: rotate(-30deg);"></div>
+    <div class="scratch" style="top: 50%; right: 40%; transform: rotate(15deg);"></div>
+
+    <div class="center">
+        <div>
+            <h1 class="logo"><span>P</span><span>R</span><span>E</span><span style="display:inline-block;width:0.15em"></span><span>P</span><span>U</span><span>R</span><span>R</span></h1>
+            <p class="tagline">Making test prep easy</p>
+            <p class="copyright">&copy; 2026 PRE PURR</p>
+        </div>
+    </div>
+    <canvas id="cat" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;image-rendering:pixelated;"></canvas>
+
+
+<script>
+(function() {
+    const canvas = document.getElementById('cat');
+    const ctx = canvas.getContext('2d');
+    const S = 5;
+    const W = 15, H = 11;
+
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const baseSprites = {
+        walk1: [
+            '.BB..BB........',
+            'BOOBBOOB.......',
+            'BOOOOOOB.......',
+            'BOBOOBOOB......',
+            'BOOOPOOOB......',
+            'BOOOOOOOOOB....',
+            'BOOODDDOOBBB...',
+            '.BOODDDDBBDOB..',
+            '.BOOOOOOB.BOB..',
+            '..BBBBBB..BB...',
+            '..BOB.BOB......',
+        ],
+        walk2: [
+            '.BB..BB........',
+            'BOOBBOOB.......',
+            'BOOOOOOB.......',
+            'BOBOOBOOB......',
+            'BOOOPOOOB......',
+            'BOOOOOOOOOB....',
+            'BOOODDDOOBBB...',
+            '.BOODDDDBBDOB..',
+            '.BOOOOOOB.BOB..',
+            '..BBBBBB..BB...',
+            '...BOB.BOB.....',
+        ],
+        annoyed: [
+            '.BB..BB........',
+            'BOOBBOOB.......',
+            'BOOOOOOB.......',
+            'BBBOOBBOB......',
+            'BOOOPOOOB......',
+            'BOOOOOOOOOB....',
+            'BOOODDDOOBBB...',
+            '.BOODDDDBBDOB..',
+            '.BOOOOOOB.BOB..',
+            '..BBBBBB..BB...',
+            '..BOB.BOB......',
+        ],
+        blink: [
+            '.BB..BB........',
+            'BOOBBOOB.......',
+            'BOOOOOOB.......',
+            'OBBOOBBOB......',
+            'BOOOPOOOB......',
+            'BOOOOOOOOOB....',
+            'BOOODDDOOBBB...',
+            '.BOODDDDBBDOB..',
+            '.BOOOOOOB.BOB..',
+            '..BBBBBB..BB...',
+            '...............',
+        ],
+        falling: [
+            '.BB..BB........',
+            'BOOBBOOB.......',
+            'BOOOOOOB.......',
+            'BOBOOBOOB......',
+            'BOOOPOOOB......',
+            'BOOBOBOOOB.....',
+            'BOOODDDOOBBB...',
+            '.BOODDDDBBDOB..',
+            '.BOOOOOOB.BOB..',
+            '..BBBBBB..BB...',
+            '..BOB.BOB......',
+        ],
+        scratching: [
+            'BOB.BOB........',
+            'BOB.BOB........',
+            'BOB.BOB........',
+            'BOOBBOOB.......',
+            'BOOOOOOB.......',
+            'BOBOOBOOB......',
+            'BOOOPOOOB......',
+            'BOOOOOOOOOB....',
+            'BOOODDDOOBBB...',
+            '.BOODDDDBBDOB..',
+            '.BOOOOOOB.BOB..',
+            '..BBBBBB..BB...',
+            '..BOB.BOB......',
+            '..BOB.BOB......',
+        ],
+    };
+
+    const palettes = [
+        { O: '#e8932a', D: '#c47420', P: '#ffaabb', name: 'orange' },
+        { O: '#aaaaaa', D: '#888888', P: '#ffaabb', name: 'grey' },
+        { O: '#3a3a3a', D: '#222222', P: '#ff8899', name: 'black' },
+        { O: '#f0e6d0', D: '#d4c4a8', P: '#ffaabb', name: 'cream' },
+        { O: '#d4844a', D: '#a86030', P: '#ffaabb', name: 'ginger' },
+    ];
+
+    const accessories = [
+        { name: 'none', draw: function(){} },
+        { name: 'shades', draw: function(x, y, flip, S) {
+            const sx = flip ? x + 7*S : x + 3*S;
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(sx, y + 3*S, 3*S, S);
+            ctx.fillRect(sx + 1*S, y + 4*S, 2*S, S);
+            ctx.fillRect(sx + 2*S, y + 5*S, S, S);
+            ctx.fillRect(sx + 4*S, y + 3*S, 3*S, S);
+            ctx.fillRect(sx + 5*S, y + 4*S, 2*S, S);
+            ctx.fillRect(sx + 6*S, y + 5*S, S, S);
+            ctx.fillRect(sx + 3*S, y + 3*S, S, S);
+        }},
+        { name: 'hat', draw: function(x, y, flip, S) {
+            const sx = flip ? x + (W-8)*S : x;
+            ctx.fillStyle = '#cc2222';
+            ctx.fillRect(sx, y - S, 8*S, S);
+            ctx.fillRect(sx + 2*S, y - 3*S, 4*S, 2*S);
+        }},
+        { name: 'bowtie', draw: function(x, y, flip, S) {
+            const sx = flip ? x + (W-4)*S : x + 3*S;
+            ctx.fillStyle = '#cc2222';
+            ctx.fillRect(sx, y + 5*S, S, S);
+            ctx.fillRect(sx - S, y + 4.5*S, S, 2*S);
+            ctx.fillRect(sx + S, y + 4.5*S, S, 2*S);
+        }},
+        { name: 'crown', draw: function(x, y, flip, S) {
+            const sx = flip ? x + (W-7)*S : x + 1*S;
+            ctx.fillStyle = '#ffd700';
+            ctx.fillRect(sx, y - S, 6*S, S);
+            ctx.fillRect(sx, y - 2*S, S, S);
+            ctx.fillRect(sx + 2.5*S, y - 2*S, S, S);
+            ctx.fillRect(sx + 5*S, y - 2*S, S, S);
+        }},
+    ];
+
+    let scratchMarks = [];
+
+    function drawScratchMarks() {
+        scratchMarks.forEach(mark => {
+            ctx.strokeStyle = 'rgba(0,0,0,' + mark.opacity + ')';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(mark.x + i * 6, mark.y1);
+                ctx.lineTo(mark.x + i * 6 + 2, mark.y2);
+                ctx.stroke();
+            }
+        });
+        scratchMarks = scratchMarks.filter(m => { m.opacity -= 0.0008; return m.opacity > 0; });
+    }
+
+    function drawSprite(sprite, x, y, flip, palette) {
+        const colors = { 'B': '#1a1a1a', 'O': palette.O, 'D': palette.D, 'P': palette.P };
+        for (let row = 0; row < sprite.length; row++) {
+            for (let col = 0; col < sprite[row].length; col++) {
+                const ch = sprite[row][col];
+                if (ch === '.') continue;
+                const px = flip ? x + (sprite[row].length - 1 - col) * S : x + col * S;
+                ctx.fillStyle = colors[ch] || '#1a1a1a';
+                ctx.fillRect(px, y + row * S, S, S);
+            }
+        }
+    }
+
+    class Cat {
+        constructor(x, paletteIdx, accessoryIdx, speed) {
+            this.x = x;
+            this.y = 0;
+            this.palette = palettes[paletteIdx];
+            this.accessory = accessories[accessoryIdx];
+            this.direction = Math.random() > 0.5 ? 1 : -1;
+            this.speed = speed;
+            this.frame = Math.floor(Math.random() * 200);
+            this.state = 'walking';
+            this.velY = 0;
+            this.annoyedTimer = 0;
+            this.blinkTimer = 0;
+            this.offsetX = 0;
+            this.offsetY = 0;
+        }
+        getGroundY() { return window.innerHeight - H * S; }
+        init() { this.y = this.getGroundY(); }
+        update() {
+            const groundY = this.getGroundY();
+            if (this.state === 'walking') {
+                this.x += this.speed * this.direction;
+                if (this.x > canvas.width - W*S) this.direction = -1;
+                if (this.x < 10) this.direction = 1;
+                this.frame++;
+                const isBlink = Math.floor(this.frame / 8) % 40 === 0;
+                const spr = isBlink ? baseSprites.blink : (Math.floor(this.frame / 12) % 2 === 0 ? baseSprites.walk1 : baseSprites.walk2);
+                drawSprite(spr, this.x, this.y, this.direction === 1, this.palette);
+                this.accessory.draw(this.x, this.y, this.direction === 1, S);
+            } else if (this.state === 'annoyed') {
+                drawSprite(baseSprites.annoyed, this.x, this.y, this.direction === 1, this.palette);
+                this.accessory.draw(this.x, this.y, this.direction === 1, S);
+                this.annoyedTimer--;
+                if (this.annoyedTimer <= 0) this.state = 'walking';
+            } else if (this.state === 'held') {
+                this.blinkTimer++;
+                const spr = Math.floor(this.blinkTimer / 20) % 3 === 0 ? baseSprites.blink : baseSprites.falling;
+                drawSprite(spr, this.x, this.y, false, this.palette);
+                this.accessory.draw(this.x, this.y, false, S);
+            } else if (this.state === 'falling') {
+                const slideSpeed = 2.5;
+                const prevY = this.y;
+                this.y += slideSpeed;
+                drawSprite(baseSprites.scratching, this.x, this.y, false, this.palette);
+                this.accessory.draw(this.x, this.y + 3*S, false, S);
+                scratchMarks.push({ x: this.x + 1*S, y1: prevY + 2*S, y2: this.y + 2*S, opacity: 0.12 });
+                if (this.y >= groundY) {
+                    this.y = groundY;
+                    this.state = 'bouncing';
+                    this.velY = -10;
+                }
+            } else if (this.state === 'bouncing') {
+                this.velY += 1.2;
+                this.y += this.velY;
+                drawSprite(baseSprites.falling, this.x, this.y, false, this.palette);
+                this.accessory.draw(this.x, this.y, false, S);
+                if (this.y >= groundY) {
+                    this.y = groundY;
+                    if (Math.abs(this.velY) > 2) {
+                        this.velY = -this.velY * 0.3;
+                    } else {
+                        this.velY = 0;
+                        this.state = 'annoyed';
+                        this.annoyedTimer = 60;
+                    }
+                }
+            }
+        }
+        hitTest(px, py) {
+            return px >= this.x && px <= this.x + W*S && py >= this.y && py <= this.y + H*S;
+        }
+    }
+
+    const cats = [
+        new Cat(80, 0, 0, 0.4),
+        new Cat(300, 1, 1, 0.55),
+        new Cat(500, 4, 2, 0.35),
+        new Cat(200, 3, 3, 0.5),
+        new Cat(650, 2, 4, 0.45),
+    ];
+    cats.forEach(c => c.init());
+
+    let dragCat = null;
+
+    function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawScratchMarks();
+        cats.forEach(c => c.update());
+        requestAnimationFrame(tick);
+    }
+
+    function getPos(e) {
+        if (e.touches) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        return { x: e.clientX, y: e.clientY };
+    }
+
+    canvas.style.pointerEvents = 'none';
+    document.addEventListener('mousedown', startDrag);
+    document.addEventListener('touchstart', startDrag, { passive: false });
+
+    function startDrag(e) {
+        const pos = getPos(e);
+        for (let i = cats.length - 1; i >= 0; i--) {
+            if (cats[i].hitTest(pos.x, pos.y)) {
+                e.preventDefault();
+                dragCat = cats[i];
+                dragCat.state = 'held';
+                dragCat.blinkTimer = 0;
+                dragCat.offsetX = dragCat.x - pos.x;
+                dragCat.offsetY = dragCat.y - pos.y;
+                document.addEventListener('mousemove', onDrag);
+                document.addEventListener('touchmove', onDrag, { passive: false });
+                document.addEventListener('mouseup', endDrag);
+                document.addEventListener('touchend', endDrag);
+                return;
+            }
+        }
+    }
+
+    function onDrag(e) {
+        if (!dragCat) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        dragCat.x = pos.x + dragCat.offsetX;
+        dragCat.y = pos.y + dragCat.offsetY;
+    }
+
+    function endDrag() {
+        if (!dragCat) return;
+        dragCat.state = 'falling';
+        dragCat.velY = 0;
+        dragCat = null;
+        document.removeEventListener('mousemove', onDrag);
+        document.removeEventListener('touchmove', onDrag);
+        document.removeEventListener('mouseup', endDrag);
+        document.removeEventListener('touchend', endDrag);
+    }
+
+    tick();
+})();
+</script>
+</body>
+</html>
