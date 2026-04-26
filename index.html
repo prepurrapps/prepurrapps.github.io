@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prepurr</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Englebert&family=Londrina+Solid:wght@400;900&family=Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Englebert&family=Inter:wght@400;500&family=Londrina+Solid:wght@400;900&family=Righteous&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { overflow: hidden; height: 100%; }
@@ -14,16 +15,40 @@
         .center { flex: 1; display: flex; align-items: center; justify-content: center; }
         .center > div { text-align: center; position: relative; }
         .logo { font-family: 'Londrina Solid', sans-serif; font-size: clamp(80px, 20vw, 252px); letter-spacing: 2px; color: #e8432a; padding: 0 16px; line-height: 1; margin-bottom: 0; cursor: default; }
-        .logo span { display: inline-block; transition: transform 0.3s ease; }
-        .logo:hover span:nth-child(1) { transform: rotate(-5deg) translateY(-4px); transition-delay: 0s; }
-        .logo:hover span:nth-child(2) { transform: rotate(3deg) translateY(6px); transition-delay: 0.03s; }
-        .logo:hover span:nth-child(3) { transform: rotate(-4deg) translateY(-5px); transition-delay: 0.06s; }
-        .logo:hover span:nth-child(4) { transform: rotate(6deg) translateY(3px); transition-delay: 0.09s; }
-        .logo:hover span:nth-child(5) { transform: rotate(-3deg) translateY(-6px); transition-delay: 0.12s; }
-        .logo:hover span:nth-child(6) { transform: rotate(5deg) translateY(4px); transition-delay: 0.15s; }
-        .logo:hover span:nth-child(7) { transform: rotate(-6deg) translateY(-3px); transition-delay: 0.18s; }
-        .logo:hover span:nth-child(8) { transform: rotate(4deg) translateY(5px); transition-delay: 0.21s; }
-        .tagline { font-family: 'Englebert', cursive; font-size: clamp(22px, 4vw, 40px); color: rgba(0,0,0,0.4); letter-spacing: 1px; }
+        .logo span { display: inline-block; transition: all 0.3s ease; }
+        .logo span.glitching {
+            animation: glitch 0.8s steps(1) 1;
+        }
+        .logo span.pixelated {
+            filter: url(#pixelate);
+            text-shadow:
+                clamp(2px, 0.3vw, 4px) 0 0 #1a1a1a,
+                clamp(-2px, -0.3vw, -4px) 0 0 #1a1a1a,
+                0 clamp(2px, 0.3vw, 4px) 0 #1a1a1a,
+                0 clamp(-2px, -0.3vw, -4px) 0 #1a1a1a,
+                clamp(2px, 0.3vw, 4px) clamp(2px, 0.3vw, 4px) 0 #1a1a1a,
+                clamp(-2px, -0.3vw, -4px) clamp(-2px, -0.3vw, -4px) 0 #1a1a1a,
+                clamp(2px, 0.3vw, 4px) clamp(-2px, -0.3vw, -4px) 0 #1a1a1a,
+                clamp(-2px, -0.3vw, -4px) clamp(2px, 0.3vw, 4px) 0 #1a1a1a;
+        }
+        @keyframes glitch {
+            0% { opacity: 1; text-shadow: 4px 0 #ff0000, -4px 0 #00ffff; transform: translate(0); }
+            10% { opacity: 0; }
+            15% { opacity: 1; text-shadow: -3px 0 #ff0000, 3px 0 #00ffff; transform: translate(5px, -2px) skewX(5deg); }
+            20% { opacity: 0; }
+            25% { opacity: 1; transform: translate(-4px, 1px) skewX(-3deg); }
+            35% { text-shadow: 3px 0 #ff0000, -3px 0 #00ffff; transform: translate(2px, -3px); }
+            40% { opacity: 0; }
+            45% { opacity: 1; transform: translate(-3px, 2px) skewX(4deg); }
+            55% { text-shadow: -4px 0 #ff0000, 4px 0 #00ffff; }
+            60% { opacity: 0; }
+            65% { opacity: 1; transform: translate(3px, -1px) skewX(-2deg); }
+            75% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; transform: translate(-2px, 2px); }
+            85% { opacity: 0; }
+            90% { opacity: 1; transform: translate(0); }
+            100% { opacity: 1; text-shadow: none; transform: translate(0); }
+        }
+        .tagline { font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; font-size: clamp(22px, 4vw, 40px); color: rgba(0,0,0,0.4); letter-spacing: 1px; }
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 28px; }
         .nav-logo { font-family: 'Londrina Solid', sans-serif; font-size: 22px; color: #e8432a; text-decoration: none; }
         .nav-links a { color: rgba(0,0,0,0.4); text-decoration: none; font-size: 14px; margin-left: 24px; font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -44,6 +69,15 @@
             <a href="mailto:prepurr.apps@gmail.com">Contact</a>
         </div>
     </nav>
+    <svg style="position:absolute;width:0;height:0;">
+        <filter id="pixelate" x="0%" y="0%" width="100%" height="100%">
+            <feFlood x="4" y="4" height="2" width="2"/>
+            <feComposite width="8" height="8"/>
+            <feTile result="a"/>
+            <feComposite in="SourceGraphic" in2="a" operator="in"/>
+            <feMorphology operator="dilate" radius="4"/>
+        </filter>
+    </svg>
     <div class="paw" style="position:fixed; top: 8%; left: 5%; transform: rotate(-25deg);">🐾</div>
     <div class="paw" style="position:fixed; top: 12%; right: 8%; transform: rotate(15deg);">🐾</div>
     <div class="paw" style="position:fixed; top: 35%; left: 3%; transform: rotate(-45deg); font-size: clamp(18px, 3vw, 36px);">🐾</div>
@@ -72,9 +106,65 @@
         <div>
             <h1 class="logo"><span>P</span><span>R</span><span>E</span><span style="display:inline-block;width:0.15em"></span><span>P</span><span>U</span><span>R</span><span>R</span></h1>
             <p class="tagline">Making test prep easy</p>
-            <p class="copyright">&copy; 2026 PRE PURR</p>
+            <p class="copyright">&copy; 2026 PREPURR</p>
         </div>
     </div>
+    <script>
+    (function() {
+        const spans = document.querySelectorAll('.logo span');
+        const letterSpans = Array.from(spans).filter(s => s.textContent.trim().length > 0);
+        let timeouts = [];
+
+        function clearAll() {
+            timeouts.forEach(t => clearTimeout(t));
+            timeouts = [];
+            letterSpans.forEach(s => {
+                s.classList.remove('pixelated', 'glitching');
+            });
+        }
+
+        let active = false;
+
+        function pixelateWithGlitch(span) {
+            if (!active) return;
+            span.classList.add('glitching');
+            const t = setTimeout(() => {
+                if (!active) { span.classList.remove('glitching'); return; }
+                span.classList.remove('glitching');
+                span.classList.add('pixelated');
+            }, 800);
+            timeouts.push(t);
+        }
+
+        letterSpans.forEach((span, idx) => {
+            span.addEventListener('mouseenter', () => {
+                clearAll();
+                active = true;
+                pixelateWithGlitch(span);
+
+                for (let dist = 1; dist <= letterSpans.length; dist++) {
+                    const left = letterSpans[idx - dist];
+                    const right = letterSpans[idx + dist];
+                    const delay = dist * 250;
+
+                    if (left) {
+                        const t = setTimeout(() => pixelateWithGlitch(left), delay);
+                        timeouts.push(t);
+                    }
+                    if (right) {
+                        const t = setTimeout(() => pixelateWithGlitch(right), delay);
+                        timeouts.push(t);
+                    }
+                }
+            });
+        });
+
+        document.querySelector('.logo').addEventListener('mouseleave', () => {
+            active = false;
+            clearAll();
+        });
+    })();
+    </script>
     <canvas id="cat" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;image-rendering:pixelated;"></canvas>
 
 
